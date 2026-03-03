@@ -1,0 +1,33 @@
+name: funcs workflow
+on: [push]
+
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: first sleep
+        id: first-step
+        run: sleep 30
+        #run: exit 1
+        #failed simulation
+      - name: runs on cancelled
+        if: ${{ cancelled() }}
+        run: echo "runs on cancelled"
+      - name: runs on any case
+        if: ${{ always() }}
+        run: echo "runs on any case"
+      - name: runs on success
+        if: ${{ success() }}
+        run: echo "runs on success"
+      - name: runs on failure in all step
+        if: ${{ failure() }}
+        run: echo "runs on failure"
+      - name: runs on failure and check id in first-step
+        if: ${{ failure() && steps.first-step.conclusion == 'failure' }}
+        run: echo "runs on failure"
+  second-job: #сработает при exit 1 выше
+    runs-on: ubuntu-latest
+    needs: job
+    if: ${{ failure() }}
+    steps:
+      - run: echo "job was failed"
