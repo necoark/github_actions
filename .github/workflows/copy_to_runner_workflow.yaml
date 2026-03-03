@@ -1,0 +1,25 @@
+name: on push copy repo to runner
+on:
+  push:
+    branches:
+      - master
+      - "page/*"
+      - "page/**"
+      - "!page/blog" #можно использовать branches-ignore если не юзаем branches
+    # tags:
+    #   - "v1.*"
+    #   - "!v1.2.1"
+    paths:
+      - "**.html"
+    #используется условие и, то есть должен быть пуш в бранчи выше и изменение в файле
+
+jobs:
+  run-commnd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: files before
+        run: ls -la
+      - uses: actions/checkout@v4
+      #can copy manually with git commands
+      - name: files after
+        run: ls -la
