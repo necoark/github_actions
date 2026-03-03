@@ -8,6 +8,12 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         node-version: [12, 14, 17]
+        include: #можно добавить нужную ось с версией
+          - os: macos-latest
+            node-version: 17
+        exclude: #можно убрать по версии, а можно и по ос полностью убрать
+          - os: ubuntu-latest
+            node-version: 14
       fail-fast: false #продолжит дальше при ошибке
       max-parallel: 2 #опционально, можно параллел
     runs-on: ${{ matrix.os }}
