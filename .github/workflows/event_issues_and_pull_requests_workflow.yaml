@@ -1,0 +1,15 @@
+name: event issues and pull requests
+on:
+  issues:
+    types: [opened, edited, deleted]
+  pull_request:
+    types: [assigned, closed]
+
+jobs:
+  run-command:
+    runs-on: ubuntu-latest
+    steps:
+      - name: show vars
+        run: |
+          echo $GITHUB_SHA
+          echo $GITHUB_REF
