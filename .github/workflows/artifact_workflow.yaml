@@ -8,7 +8,7 @@ jobs:
       - name: math expression
         run: expr 2 + 2 > math-result.txt
       - name: upload file result
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: math-result
           path: math-result.txt
@@ -17,7 +17,7 @@ jobs:
     needs: first-job
     steps:
       - name: download file
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: math-result
       - name: print file
