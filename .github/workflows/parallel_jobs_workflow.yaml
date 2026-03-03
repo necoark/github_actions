@@ -1,0 +1,20 @@
+name: parallel jobs on push
+on: push
+
+jobs:
+  run-command:
+    runs-on: ubuntu-latest
+    steps:
+      - name: display node ver
+        run: node -v
+  run-parallel-command:
+    runs-on: windows-latest
+    steps:
+      - name: display node ver
+        run: node -v
+  run-after-ubuntu-command-done:
+    runs-on: macos-latest
+    needs: run-command
+    steps:
+      - name: display node ver
+        run: node -v
