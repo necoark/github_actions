@@ -1,0 +1,13 @@
+name: schedule
+on:
+  schedule:
+    - cron: "*/10 * * * *" #https://crontab.cronhub.io/
+
+jobs:
+  run-command:
+    runs-on: ubuntu-latest
+    steps:
+      - name: show vars
+        run: |
+          echo $GITHUB_SHA
+          echo $GITHUB_REF
