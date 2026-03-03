@@ -1,0 +1,29 @@
+name: manual start with inputs
+on: 
+  workflow_dispatch:
+    inputs:
+      titleCustom:
+        description: type the title
+        type: string
+        required: true
+        default: "hello world"
+      selectCustom:
+        description: select value
+        type: choice
+        required: true
+        options: [value 1, value 2, value 3, value 4]
+        default: "value 2"
+      checkCustom:
+        description: checkbox
+        type: boolean
+        required: false
+
+jobs:
+  run-first-commnd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: event vars
+        run: |
+          echo "title: ${{ inputs.titleCustom }}"
+          echo "title: ${{ inputs.selectCustom }}"
+          echo "title: ${{ inputs.checkCustom }}"
