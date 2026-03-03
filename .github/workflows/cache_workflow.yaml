@@ -1,0 +1,19 @@
+name: cache workflow
+on: workflow_dispatch
+
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    environment: "staging"
+    steps:
+      - uses: actions/checkout@v4
+      - name: cache node_modules
+        id: cache-step
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: "cache-file"
+      - name: display cache
+        run: echo "${{ toJSON(steps.cache-step.outputs) }}"
+      - name: install npm modules
+        run: npm install
