@@ -1,0 +1,20 @@
+name: sequential launch workflows #launch this after another workflow will be completed
+on: 
+  workflow_run: 
+    workflows: [on push copy repo to runner]
+    types:
+      - completed
+
+jobs:
+  success-command:
+    runs-on: ubuntu-latest
+    if: ${{  github.event.workflow_run.conclusion == 'success'  }}
+    steps:
+      - name: echo success
+        run: echo "success"
+  failure-command:
+    runs-on: ubuntu-latest
+    if: ${{  github.event.workflow_run.conclusion == 'failure'  }}
+    steps:
+      - name: echo failed
+        run: echo "failed"
