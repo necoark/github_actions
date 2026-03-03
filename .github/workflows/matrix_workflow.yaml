@@ -1,0 +1,19 @@
+name: matrix workflow
+on: push
+
+jobs:
+  testing-matrix-job:
+    continue-on-error: true #покажет успех если хоть один упал с ошибкой
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [12, 14, 17]
+      fail-fast: false #продолжит дальше при ошибке
+      max-parallel: 2 #опционально, можно параллел
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: node -v
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: node -v
