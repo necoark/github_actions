@@ -1,0 +1,10 @@
+name: timeout workflow
+on: push
+
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: sleep
+        run: sleep 200
