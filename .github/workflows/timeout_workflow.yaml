@@ -4,7 +4,9 @@ on: push
 jobs:
   first-job:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 1 #можно лимитить на уровне job
     steps:
       - name: sleep
         run: sleep 200
+        #timeout-minutes: 1
+        #можно лимитировать на уровне стэпа
