@@ -1,0 +1,12 @@
+name: concurrency workflow
+on: workflow_dispatch
+concurrency: concurrency-id #запускает первый и если есть еще, то только ласт выполняет
+#если надо только 1, то в группу и cancel-in-progress в true
+
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: sleep
+        run: sleep 50
+        timeout-minutes: 1
